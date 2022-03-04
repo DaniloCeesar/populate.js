@@ -82,6 +82,13 @@ function populate(form, data, basename) {
 	}
 };
 
-if (typeof module !== 'undefined' && module.exports) {
+// Play nice with AMD, CommonJS or a plain global object.
+if ( typeof define == 'function' && typeof define.amd == 'object' && define.amd ) {
+	define(function() {
+		return populate;
+	});
+}	else if ( typeof module !== 'undefined' && module.exports ) {
 	module.exports = populate;
-} 
+} else {
+	root.populate = populate;
+}
