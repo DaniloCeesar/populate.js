@@ -45,7 +45,13 @@ function populate(form, data, basename) {
 
 		switch(type ) {
 			default:
-				element.value = value;
+				if (NodeList.prototype.isPrototypeOf(element)) {
+					for (let index = 0; index < element.length; index++) {
+						element[index] = value;
+					}
+				} else {
+					element.value = value;
+				}
 				break;
 
 			case 'radio':
